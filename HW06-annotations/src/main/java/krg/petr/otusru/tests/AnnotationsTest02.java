@@ -5,18 +5,22 @@ import krg.petr.otusru.testframework.annotations.After;
 import krg.petr.otusru.testframework.annotations.Before;
 import krg.petr.otusru.testframework.annotations.Test;
 
+import java.util.Random;
+
 public class AnnotationsTest02 {
+
+    public int getRandomNumber() {
+        Random random = new Random();
+        return random.nextInt(100);
+    }
 
     @Before
     public void setUp01() {
 
         System.out.println("Setting up test #01 ...");
-    }
-
-    @Before
-    public void setUp02() {
-
-        System.out.println("Setting up test #02 ...");
+        if ((getRandomNumber() % 2) != 0) {
+            throw new NullPointerException();
+        }
     }
 
     @Test
@@ -28,7 +32,9 @@ public class AnnotationsTest02 {
     @Test
     public void testMethod03() {
         System.out.println("Running testMethod03 ...");
-        throw new NullPointerException();
+        if ((getRandomNumber() % 2) != 0) {
+            throw new NullPointerException();
+        }
     }
 
     @After

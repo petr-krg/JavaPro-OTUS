@@ -46,30 +46,42 @@ public class TestExecuter {
         for (Class<?> testClass : testClasses) {
             System.out.printf("Running test for %s \n", testClass.getName());
 
-            Object testObject;
-            try {
-                testObject = testClass.getConstructor().newInstance();
-            } catch (InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException  e) {
-                e.printStackTrace();
-                continue;
-            }
+//            Object testObject;
+//            try {
+//                testObject = testClass.getConstructor().newInstance();
+//            } catch (InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException  e) {
+//                e.printStackTrace();
+//                continue;
+//            }
 
             List<Method> beforeMethods = findMethodsAnnotatedWith(testClass, Before.class);
             List<Method> afterMethods = findMethodsAnnotatedWith(testClass, After.class);
             List<Method> testMethods = findMethodsAnnotatedWith(testClass, Test.class);
 
-            for (Method testMethod : testMethods) {
+            testMethodsLoop: for (Method testMethod : testMethods) {
+
+                Object testObject;
+                try {
+                    testObject = testClass.getConstructor().newInstance();
+                } catch (InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException  e) {
+                    e.printStackTrace();
+                    continue;
+                }
+
                 for (Method beforeMethod : beforeMethods) {
+                    testStatistics.testStarted();
                     try {
                         beforeMethod.invoke(testObject);
                     } catch (IllegalAccessException | InvocationTargetException e) {
                         e.printStackTrace();
+                        testStatistics.testFailed();
+                        System.out.printf("%s FAILED \n", beforeMethod.getName());
+                        break testMethodsLoop;
                     }
                 }
 
                 try {
                     testMethod.invoke(testObject);
-                    testStatistics.testStarted();
                     System.out.printf("%s PASSED \n", testMethod.getName());
                 } catch (IllegalAccessException | InvocationTargetException e) {
                     testStatistics.testFailed();
