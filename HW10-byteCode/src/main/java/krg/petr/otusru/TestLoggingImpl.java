@@ -1,9 +1,15 @@
 package krg.petr.otusru;
 
-import krg.petr.otusru.annotations.Log;
-import krg.petr.otusru.interfaces.ITestLogging;
+import krg.petr.otusru.logingframework.annotations.Log;
+import krg.petr.otusru.logingframework.interfaces.TestLogging;
 
-public class TestLogging implements ITestLogging {
+public class TestLoggingImpl implements TestLogging {
+
+    @Override
+    @Log
+    public void calculate() {
+        System.out.println("log method without parameters");
+    }
     @Override
     @Log
     public void calculate(int param) {

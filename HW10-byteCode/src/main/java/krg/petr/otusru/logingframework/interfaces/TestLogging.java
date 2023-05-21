@@ -1,6 +1,7 @@
-package krg.petr.otusru.interfaces;
+package krg.petr.otusru.logingframework.interfaces;
 
-public interface ITestLogging {
+public interface TestLogging {
+    void calculate();
     void calculate(int param);
     void calculate(int param1, int param2);
     void calculate(int param1, int param2, String param3);
