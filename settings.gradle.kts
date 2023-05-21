@@ -1,6 +1,9 @@
 rootProject.name = "JavaPro-Otus"
 include("HW01-gradle")
 include("HW04-generics")
+include("HW06-annotations")
+include("HW08-gc")
+include("HW10-byteCode")
 
 pluginManagement {
     val jgitver: String by settings
@@ -16,5 +19,4 @@ pluginManagement {
         id("com.github.johnrengelman.shadow") version johnrengelmanShadow
         id("com.google.cloud.tools.jib") version jib
     }
-}
-include("HW10-byteCode")
+
