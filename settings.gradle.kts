@@ -19,4 +19,5 @@ pluginManagement {
         id("com.github.johnrengelman.shadow") version johnrengelmanShadow
         id("com.google.cloud.tools.jib") version jib
     }
+}
 

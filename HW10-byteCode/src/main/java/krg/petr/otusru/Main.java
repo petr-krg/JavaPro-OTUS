@@ -13,6 +13,7 @@ public class Main {
             System.exit(1);
         }
 
+        logging.calcWithoutLog();
         logging.calculate();
         logging.calculate(5);
         logging.calculate(6,4);

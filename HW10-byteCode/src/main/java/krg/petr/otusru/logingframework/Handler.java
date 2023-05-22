@@ -1,5 +1,7 @@
 package krg.petr.otusru.logingframework;
 
+import krg.petr.otusru.logingframework.annotations.Log;
+
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -19,13 +21,16 @@ public class Handler implements InvocationHandler {
             Method logMethod = getCachedMethod(method);
 
             if (logMethod != null) {
-                System.out.println("execute method: " + method.getName() + ", param: " + formatArguments(args));
+                if (logMethod.isAnnotationPresent(Log.class)) {
+                    System.out.println("execute method: " + method.getName() + ", param: " + formatArguments(args));
+                }
             }
 
             return method.invoke(target, args);
         }
 
         private Method getCachedMethod(Method method) {
+
             String methodName = method.getName();
 
             if (methodCache.containsKey(methodName)) {
@@ -44,6 +49,7 @@ public class Handler implements InvocationHandler {
         }
 
         private boolean isMatchingMethod(Method m1, Method m2) {
+
             if (!m1.getName().equals(m2.getName())) {
                 return false;
             }

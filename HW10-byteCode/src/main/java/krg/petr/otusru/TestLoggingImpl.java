@@ -6,6 +6,11 @@ import krg.petr.otusru.logingframework.interfaces.TestLogging;
 public class TestLoggingImpl implements TestLogging {
 
     @Override
+    public void calcWithoutLog() {
+        System.out.println("method without @log annotation");
+    }
+
+    @Override
     @Log
     public void calculate() {
         System.out.println("log method without parameters");
