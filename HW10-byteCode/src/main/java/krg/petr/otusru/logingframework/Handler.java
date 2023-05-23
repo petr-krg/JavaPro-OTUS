@@ -21,9 +21,7 @@ public class Handler implements InvocationHandler {
             Method logMethod = getCachedMethod(method);
 
             if (logMethod != null) {
-                if (logMethod.isAnnotationPresent(Log.class)) {
                     System.out.println("execute method: " + method.getName() + ", param: " + formatArguments(args));
-                }
             }
 
             return method.invoke(target, args);
@@ -40,8 +38,12 @@ public class Handler implements InvocationHandler {
             Method[]  methods = target.getClass().getMethods();
             for (Method m : methods) {
                 if (isMatchingMethod(m, method)) {
-                    methodCache.put(methodName, m);
-                    return m;
+                    if (m.isAnnotationPresent(Log.class)) {
+                        methodCache.put(methodName, m);
+                        return m;
+                    } else {
+                        break;
+                    }
                 }
             }
 
