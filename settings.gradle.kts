@@ -20,4 +20,4 @@ pluginManagement {
         id("com.google.cloud.tools.jib") version jib
     }
 }
-
+include("HW15-structuralPatterns")
