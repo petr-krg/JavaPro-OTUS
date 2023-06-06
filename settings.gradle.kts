@@ -21,3 +21,4 @@ pluginManagement {
     }
 }
 include("HW15-structuralPatterns")
+include("HW16-serialization")
