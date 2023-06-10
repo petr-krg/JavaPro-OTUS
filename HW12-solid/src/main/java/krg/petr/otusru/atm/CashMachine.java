@@ -1,77 +1,61 @@
 package krg.petr.otusru.atm;
 
-import krg.petr.otusru.atm.currencis.CurrenciesEnum.Currency;
 import krg.petr.otusru.atm.exceptions.InsufficientMoneyException;
 
 import java.util.*;
 
 public class CashMachine {
-    private final Map<Currency, Map<Integer, Integer>> banknoteBaskets;
+    private final Map<Integer, Banknote> banknoteBaskets;
+
 
     public CashMachine() {
-        banknoteBaskets = new HashMap<>();
+        this.banknoteBaskets = new HashMap<>();
     }
 
-    public void addBanknote(Currency currency, int denomination, int quantity) {
-        banknoteBaskets.putIfAbsent(currency, new HashMap<>());
-        int currentQuantity = banknoteBaskets.get(currency).getOrDefault(denomination, 0);
-        banknoteBaskets.get(currency).put(denomination, currentQuantity + quantity);
+    public void addBanknote(int denomination, int quantity) {
+        Banknote banknote = banknoteBaskets.getOrDefault(denomination, new Banknote(denomination, 0));
+        banknote.addQuantity(quantity);
+        banknoteBaskets.put(denomination,banknote);
     }
 
-    public Map<Currency, Integer> getTotalAmount() {
-        Map<Currency, Integer> totalAmount = new HashMap<>();
-        for (Map.Entry<Currency, Map<Integer, Integer>> currencyEntry : banknoteBaskets.entrySet()) {
-            Currency currency = currencyEntry.getKey();
-            HashMap<Integer, Integer> basket = (HashMap<Integer, Integer>) currencyEntry.getValue();
-            int amount = 0;
-            for (Map.Entry<Integer, Integer> denominationEntry : basket.entrySet()) {
-                int denomination = denominationEntry.getKey();
-                int quantity = denominationEntry.getValue();
-                amount += denomination * quantity;
-            }
-            totalAmount.put(currency, amount);
+    public Map<Integer, Integer> getTotalAmount() {
+        Map<Integer, Integer> totalAmount = new HashMap<>();
+        for (Banknote banknote : banknoteBaskets.values()) {
+            int amount = banknote.getDenomination() * banknote.getQuantity();
+            totalAmount.put(banknote.getDenomination(), amount);
         }
         return totalAmount;
     }
 
-    public Map<Integer, Integer> withdrawBanknotes(int amount, Currency currency) {
+    public Map<Integer, Integer> withdrawBanknotes(int amount) throws InsufficientMoneyException {
         Map<Integer, Integer> withdrawal = new HashMap<>();
-
-        Map<Integer, Integer> basket = banknoteBaskets.get(currency);
-        if (basket == null) {
-            throw new IllegalArgumentException("Currency not supported");
-        }
-
-        List<Integer> denominations = new ArrayList<>(basket.keySet());
+        List<Integer> denominations = new ArrayList<>(banknoteBaskets.keySet());
         denominations.sort(Comparator.reverseOrder());
 
         for (int denomination : denominations) {
+            Banknote banknote = banknoteBaskets.get(denomination);
             int count = amount / denomination;
             if (count > 0) {
-                int availableCount = basket.getOrDefault(denomination, 0);
-                int withdrawalCount = Math.min(count, availableCount);
-                if (withdrawalCount > 0) {
-                    withdrawal.put(denomination, withdrawalCount);
-                    amount -= withdrawalCount * denomination;
+                int availableCount = banknote != null ? banknote.getQuantity() : 0;
+                int withdrawCount = Math.min(count, availableCount);
+                if (withdrawCount > 0) {
+                    withdrawal.put(denomination, withdrawCount);
+                    amount -= withdrawCount * denomination;
                 }
             }
         }
 
         if (amount > 0) {
-            try {
-                throw new InsufficientMoneyException("Cannot withdraw the requested amount");
-            } catch (InsufficientMoneyException e) {
-                throw new RuntimeException(e);
-            }
+            throw new InsufficientMoneyException("Cannot withdraw the requested amount");
         }
 
         for (Map.Entry<Integer, Integer> entry : withdrawal.entrySet()) {
             int denomination = entry.getKey();
             int quantity = entry.getValue();
-            basket.put(denomination, basket.get(denomination) - quantity);
+            Banknote banknote = banknoteBaskets.get(denomination);
+            banknote.reduceQuantity(quantity);
         }
 
         return withdrawal;
     }
-
 }
