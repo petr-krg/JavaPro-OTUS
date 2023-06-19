@@ -1,29 +1,22 @@
 package krg.petr.otusru;
 
-import krg.petr.otusru.atm.CashMachine;
-import krg.petr.otusru.atm.console.ConsoleOutput;
 import krg.petr.otusru.atm.exceptions.InsufficientMoneyException;
-import krg.petr.otusru.atm.interfaces.OutInterface;
-
-import java.util.Map;
+import krg.petr.otusru.atm.model.Banknote;
+import krg.petr.otusru.atm.service.ATMService;
 
 public class Main {
     public static void main(String[] args) throws InsufficientMoneyException {
-        CashMachine cashMachine = new CashMachine();
-        OutInterface print = new ConsoleOutput();
+        ATMService atmService = new ATMService();
 
-        cashMachine.addBanknote(1000, 5);
-        cashMachine.addBanknote(5000, 3);
-        cashMachine.addBanknote(500, 4);
+        atmService.addBanknotes(new Banknote(1000, 5));
+        atmService.addBanknotes(new Banknote(5000, 3));
+        atmService.addBanknotes(new Banknote(500, 4));
 
-        Map<Integer, Integer> totalAmount = cashMachine.getTotalAmount();
-        print.printTotalAmount(totalAmount);
+        ATMService.printTotalAmount(atmService.getTotalAmount());
 
         int withdrawAmount = 8000;
-        Map<Integer, Integer> withdrawnBanknotes = cashMachine.withdrawBanknotes(withdrawAmount);
-        print.printWithdrawBanknotes(withdrawnBanknotes);
+        ATMService.printWithdrawnBanknotes(atmService.withdrawBanknotes(withdrawAmount));
 
-        totalAmount = cashMachine.getTotalAmount();
-        print.printTotalAmount(totalAmount);
+        ATMService.printTotalAmount(atmService.getTotalAmount());
     }
 }
