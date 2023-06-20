@@ -4,6 +4,8 @@ include("HW04-generics")
 include("HW06-annotations")
 include("HW08-gc")
 include("HW10-byteCode")
+include("HW12-solid")
+include("HW15-structuralPatterns")
 
 pluginManagement {
     val jgitver: String by settings
@@ -20,4 +22,3 @@ pluginManagement {
         id("com.google.cloud.tools.jib") version jib
     }
 }
-include("HW15-structuralPatterns")
