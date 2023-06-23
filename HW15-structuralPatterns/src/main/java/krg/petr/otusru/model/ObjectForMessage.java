@@ -1,5 +1,6 @@
 package krg.petr.otusru.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ObjectForMessage {
@@ -11,5 +12,11 @@ public class ObjectForMessage {
 
     public void setData(List<String> data) {
         this.data = data;
+    }
+
+    public ObjectForMessage copyField() {
+        ObjectForMessage objectForMessage = new ObjectForMessage();
+        objectForMessage.data = new ArrayList<>(data);
+        return objectForMessage;
     }
 }

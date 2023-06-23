@@ -38,3 +38,5 @@ out
 *.ipr
 *.idea
 
+/HW12-solid/.gitignore
+/HW15-structuralPatterns/.gitignore
