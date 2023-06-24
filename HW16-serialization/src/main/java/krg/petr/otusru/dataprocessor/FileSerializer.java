@@ -2,16 +2,16 @@ package krg.petr.otusru.dataprocessor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.FileWriter;
+import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
 public class FileSerializer implements Serializer {
 
-    private String fileName;
+    private final File fileJSON;
 
     public FileSerializer(String fileName) {
-        this.fileName = fileName;
+        this.fileJSON = new File(fileName);
     }
 
     @Override
@@ -19,11 +19,7 @@ public class FileSerializer implements Serializer {
         //формирует результирующий json и сохраняет его в файл
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            String json = objectMapper.writeValueAsString(data);
-            FileWriter fileWriter = new FileWriter(fileName);
-            fileWriter.write(json);
-            fileWriter.close();
-            System.out.println("4564654654");
+            objectMapper.writeValue(fileJSON, data);
         } catch (IOException e) {
             throw new FileProcessException("1231231!!!");
         }
