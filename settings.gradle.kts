@@ -22,3 +22,4 @@ pluginManagement {
         id("com.google.cloud.tools.jib") version jib
     }
 }
+include("HW19-jdbc")
