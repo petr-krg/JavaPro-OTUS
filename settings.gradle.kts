@@ -7,6 +7,7 @@ include("HW10-byteCode")
 include("HW12-solid")
 include("HW15-structuralPatterns")
 include("HW16-serialization")
+include("HW19-jdbc")
 
 pluginManagement {
     val jgitver: String by settings
@@ -22,5 +23,4 @@ pluginManagement {
         id("com.github.johnrengelman.shadow") version johnrengelmanShadow
         id("com.google.cloud.tools.jib") version jib
     }
-}
 
