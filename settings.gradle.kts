@@ -9,6 +9,8 @@ include("HW15-structuralPatterns")
 include("HW16-serialization")
 include("HW19-jdbc")
 
+include("HW21-jpql")
+
 pluginManagement {
     val jgitver: String by settings
     val dependencyManagement: String by settings
