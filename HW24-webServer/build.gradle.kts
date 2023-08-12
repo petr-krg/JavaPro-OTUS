@@ -27,7 +27,6 @@ dependencies {
     implementation("org.eclipse.jetty:jetty-util")
     implementation("org.freemarker:freemarker")
 
-    testImplementation("com.h2database:h2")
     testImplementation("org.junit.jupiter:junit-jupiter-engine")
     testImplementation("org.junit.jupiter:junit-jupiter-params")
     testImplementation("org.assertj:assertj-core")
