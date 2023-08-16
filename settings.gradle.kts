@@ -8,8 +8,9 @@ include("HW12-solid")
 include("HW15-structuralPatterns")
 include("HW16-serialization")
 include("HW19-jdbc")
-
+include("HW22-cache")
 include("HW21-jpql")
+include("HW24-webServer")
 
 include("HW25-ContainerIoC")
 
@@ -30,4 +31,3 @@ pluginManagement {
         id("com.google.protobuf") version protobufVer
     }
 }
-
