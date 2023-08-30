@@ -11,6 +11,8 @@ include("HW19-jdbc")
 include("HW22-cache")
 include("HW21-jpql")
 include("HW24-webServer")
+include("HW25-ContainerIoC")
+include("HW28-SpringDataJdbc")
 
 pluginManagement {
     val jgitver: String by settings
@@ -27,3 +29,4 @@ pluginManagement {
         id("com.google.cloud.tools.jib") version jib
     }
 }
+
