@@ -9,10 +9,10 @@ import org.springframework.data.relational.core.mapping.Table;
 public class Address {
 
     @Id
-    private Long id;
+    private final Long id;
 
     @Column("address")
-    private String address;
+    private final String address;
 
     public Address(String address) {
         this(null, address);

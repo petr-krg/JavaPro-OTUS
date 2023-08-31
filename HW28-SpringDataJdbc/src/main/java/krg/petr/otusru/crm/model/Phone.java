@@ -9,10 +9,10 @@ import org.springframework.data.relational.core.mapping.Table;
 public class Phone {
 
     @Id
-    private Long id;
+    private final Long id;
 
     @Column("number")
-    private String number;
+    private final String number;
 
     public Phone(String number) {
         this(null, number);

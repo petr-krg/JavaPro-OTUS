@@ -13,6 +13,7 @@ include("HW21-jpql")
 include("HW24-webServer")
 include("HW25-ContainerIoC")
 include("HW28-SpringDataJdbc")
+include("HW31-Queue")
 
 pluginManagement {
     val jgitver: String by settings
