@@ -31,6 +31,32 @@ allprojects {
     val protobufBom: String by project
     val guava: String by project
     val jmh: String by project
+    val asm: String by project
+    val glassfishJson: String by project
+    val ehcache: String by project
+
+    val lombok: String by project
+    val gson: String by project
+
+    val mongodb: String by project
+    val mongodbReactive: String by project
+    val cassandra: String by project
+    val neo4j: String by project
+    val jedis: String by project
+
+    val jetty: String by project
+    val freemarker: String by project
+
+    val reflections: String by project
+
+    val sockjs: String by project
+    val stomp: String by project
+    val bootstrap: String by project
+    val springDocOpenapiUi: String by project
+    val jsr305: String by project
+    val grpc: String by project
+    val wiremock: String by project
+    val r2dbcPostgresql: String by project
 
     apply(plugin = "io.spring.dependency-management")
     dependencyManagement {
@@ -43,6 +69,42 @@ allprojects {
             dependency("com.google.guava:guava:$guava")
             dependency("org.openjdk.jmh:jmh-core:$jmh")
             dependency("org.openjdk.jmh:jmh-generator-annprocess:$jmh")
+            dependency("org.ow2.asm:asm-commons:$asm")
+            dependency("org.glassfish:jakarta.json:$glassfishJson")
+            dependency("org.ehcache:ehcache:$ehcache")
+
+            dependency("org.projectlombok:lombok:$lombok")
+            dependency("com.google.code.gson:gson:$gson")
+            dependency("com.datastax.oss:java-driver-core:$cassandra")
+
+            dependency("org.mongodb:mongodb-driver-core:$mongodb")
+            dependency("org.mongodb:mongodb-driver-sync:$mongodb")
+            dependency("org.mongodb:bson:$mongodb")
+            dependency("org.mongodb:mongodb-driver-reactivestreams:${mongodbReactive}")
+            dependency("org.neo4j.driver:neo4j-java-driver:$neo4j")
+            dependency("redis.clients:jedis:$jedis")
+
+            dependency("org.eclipse.jetty:jetty-servlet:$jetty")
+            dependency("org.eclipse.jetty:jetty-server:$jetty")
+            dependency("org.eclipse.jetty:jetty-webapp:$jetty")
+            dependency("org.eclipse.jetty:jetty-security:$jetty")
+            dependency("org.eclipse.jetty:jetty-http:$jetty")
+            dependency("org.eclipse.jetty:jetty-io:$jetty")
+            dependency("org.eclipse.jetty:jetty-util:$jetty")
+            dependency("org.freemarker:freemarker:$freemarker")
+            dependency("org.reflections:reflections:$reflections")
+
+            dependency("org.webjars:sockjs-client:$sockjs")
+            dependency("org.webjars:stomp-websocket:$stomp")
+            dependency("org.webjars:bootstrap:$bootstrap")
+            dependency("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springDocOpenapiUi")
+            dependency("com.google.code.findbugs:jsr305:$jsr305")
+
+            dependency("io.grpc:grpc-netty:$grpc")
+            dependency("io.grpc:grpc-protobuf:$grpc")
+            dependency("io.grpc:grpc-stub:$grpc")
+            dependency("com.github.tomakehurst:wiremock:$wiremock")
+            dependency("io.r2dbc:r2dbc-postgresql:$r2dbcPostgresql")
         }
     }
     configurations.all {
@@ -57,6 +119,7 @@ allprojects {
             force("org.codehaus.jettison:jettison:1.1")
             force("net.java.dev.jna:jna:5.8.0")
             force("com.google.errorprone:error_prone_annotations:2.7.1")
+            force("org.ow2.asm:asm:9.4")
         }
     }
 }
