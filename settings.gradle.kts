@@ -14,6 +14,10 @@ include("HW24-webServer")
 include("HW25-ContainerIoC")
 include("HW28-SpringDataJdbc")
 include("HW31-Queue")
+include("HW32-gRPC")
+include("HW34-Executors")
+include("HW37-WebFlux:client-service")
+include("HW37-WebFlux:datastore-service")
 
 pluginManagement {
     val jgitver: String by settings
