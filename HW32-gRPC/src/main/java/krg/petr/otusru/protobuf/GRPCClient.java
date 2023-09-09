@@ -58,7 +58,7 @@ public class GRPCClient {
 
         for (int i = 0; i < MAX_COUNT; i++) {
             Thread.sleep(1000);
-            var value = serverValue.get();
+            var value = serverValue.getAndSet(0);
             clientValue += value + 1;
             log.info(">>> данные клиента: {}", clientValue);
         }
