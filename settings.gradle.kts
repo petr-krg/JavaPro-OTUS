@@ -19,7 +19,6 @@ include("HW34-Executors")
 include("HW37-WebFlux:client-service")
 include("HW37-WebFlux:datastore-service")
 
-
 pluginManagement {
     val jgitver: String by settings
     val dependencyManagement: String by settings
@@ -37,4 +36,3 @@ pluginManagement {
         id("com.google.protobuf") version protobufVer
     }
 }
-
